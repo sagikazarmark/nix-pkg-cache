@@ -32,6 +32,8 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
           extra_nix_config: |
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            accept-flake-config = true
+            allow-unfree = true
 
       - name: Set up Cachix
         uses: cachix/cachix-action@v16
@@ -42,5 +44,3 @@ jobs:
 
       - name: Build
         run: nix build -L ${{ matrix.path }}#restate
-        env:
-          NIXPKGS_ALLOW_UNFREE: "1"
