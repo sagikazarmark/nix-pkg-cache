@@ -10,19 +10,13 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ${{ matrix.runner }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
         path: [nixpkgs, github:cachix/devenv-nixpkgs/rolling]
-        include:
-          - arch: x86_64-linux
-            runner: ubuntu-latest
-          - arch: aarch64-linux
-            runner: ubuntu-24.04-arm
-          - arch: aarch64-darwin
-            runner: macos-latest
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest]
 
     steps:
       - name: Checkout repository
