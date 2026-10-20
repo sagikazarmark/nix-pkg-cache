@@ -16,7 +16,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        path: [nixpkgs, github:cachix/devenv-nixpkgs/rolling]
+        path:
+          - nixpkgs
+          - github:cachix/devenv-nixpkgs/rolling
+          # TODO: remove once NixOS/nixpkgs#574205 is merged
+          - github:sagikazarmark/nixpkgs/restate-fix-build
         os: [ubuntu-latest, ubuntu-26.04-arm, macos-latest]
 
     steps:
