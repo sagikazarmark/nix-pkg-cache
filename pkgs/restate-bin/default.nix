@@ -76,7 +76,7 @@ stdenvNoCC.mkDerivation {
     runHook postInstallCheck
   '';
 
-  passthru.updateScript = ./update.sh;
+  # Updates: run pkgs/restate-bin/update.sh (see README).
 
   meta = {
     description = "Platform for developing distributed fault-tolerant applications (pre-built binaries)";

@@ -9,6 +9,9 @@ on:
     # Daily, to populate the cache for new nixpkgs-unstable and devenv-nixpkgs rolling revisions
     - cron: "37 14 * * *"
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build
@@ -34,9 +37,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Free Disk Space
-        uses: wimpysworld/nothing-but-nix@main
+        uses: wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7 # v10
         if: runner.os == 'Linux' && matrix.package != 'restate-bin'
 
       - name: Set up Nix
@@ -47,7 +52,7 @@ jobs:
             accept-flake-config = true
 
       - name: Set up Cachix
-        uses: cachix/cachix-action@v17
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
         with:
           name: restate
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
