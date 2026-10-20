@@ -1,0 +1,25 @@
+{
+  "version": "1.8.0",
+  "assets": {
+    "aarch64-darwin": {
+      "restate-cli": "sha256-ZLHfaI5t4P5g+00WXAQr3lhLnwcIlCszgNxwEQVNzIE=",
+      "restate-server": "sha256-W+8d1vztC/Qwnx1LjNQAQswcCy2+pQCYBeGgUESDdp0=",
+      "restatectl": "sha256-kVWpeJj7a7LKZB3WzCp+xyb/W32zHv6MMChJR+cVgGQ="
+    },
+    "aarch64-linux": {
+      "restate-cli": "sha256-UusNfYNkZWNJIbsBn4GIbo/GUVnu1snKUcZnl2FLuKk=",
+      "restate-server": "sha256-UY0DcZP/rokYM8kdXrJFMWOXdM9hooVILpgYByFTYek=",
+      "restatectl": "sha256-HfliYjX8GjFc9Rjwn4kxlVXKKzGOW4vHJVCKr/uI+sg="
+    },
+    "x86_64-darwin": {
+      "restate-cli": "sha256-EMcUIWLJvUNr1KuFHHCR2YFJ8D8dO8eLDRSsWHXPHVo=",
+      "restate-server": "sha256-4GzKDtN15TS8ZNaJIqP3aHTXIoXt2k4K5abph1whNPk=",
+      "restatectl": "sha256-Dj/O94c2cp79OvkzLpJSefQUZJadbAfGeOGoiWmYza4="
+    },
+    "x86_64-linux": {
+      "restate-cli": "sha256-TlP24t0I0SSY0ALtmxAZrJOg6aRmKAWdS9MowYyaAE0=",
+      "restate-server": "sha256-0LqIcO79Xp1LVNSipLc5tiz+e7hrGkRNSX+hmJrJuzY=",
+      "restatectl": "sha256-unqGsjaf7aqoTsF1v+Okr17OxcqEO4/nbsEM66pFd2k="
+    }
+  }
+}

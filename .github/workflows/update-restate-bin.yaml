@@ -1,0 +1,47 @@
+name: Update restate-bin
+
+on:
+  schedule:
+    - cron: "23 5 * * *" # daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31.11.1
+
+      - name: Record current version
+        id: before
+        run: echo "version=$(jq -r .version pkgs/restate-bin/sources.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Update restate-bin
+        run: ./pkgs/restate-bin/update.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Record new version
+        id: after
+        run: echo "version=$(jq -r .version pkgs/restate-bin/sources.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          # PRs opened with GITHUB_TOKEN don't trigger CI; set UPDATE_TOKEN (PAT or app token) to get checks on the PR
+          token: ${{ secrets.UPDATE_TOKEN || secrets.GITHUB_TOKEN }}
+          branch: update/restate-bin
+          delete-branch: true
+          commit-message: "restate-bin: ${{ steps.before.outputs.version }} -> ${{ steps.after.outputs.version }}"
+          title: "restate-bin: ${{ steps.before.outputs.version }} -> ${{ steps.after.outputs.version }}"
+          body: |
+            Release notes: https://github.com/restatedev/restate/releases/tag/v${{ steps.after.outputs.version }}
