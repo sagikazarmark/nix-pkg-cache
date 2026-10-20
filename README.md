@@ -9,6 +9,9 @@ Nix packages for [Restate](https://restate.dev), with a binary cache.
 
 Both packages provide `restate`, `restate-server` and `restatectl`.
 
+`restate` carries build fixes on top of nixpkgs while they are pending upstream ([NixOS/nixpkgs#574205](https://github.com/NixOS/nixpkgs/pull/574205)).
+They are only applied when the nixpkgs in use still needs them; otherwise the package is identical to nixpkgs' `restate`.
+
 Building Restate from source takes a long time (and occasionally breaks in nixpkgs).
 `restate-bin` is an escape hatch: it downloads the official release binaries and usually tracks upstream releases more closely.
 

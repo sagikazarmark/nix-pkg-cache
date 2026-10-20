@@ -17,6 +17,10 @@ jobs:
     name: Build
     runs-on: ${{ matrix.os }}
 
+    # Source builds depend on nixpkgs and break from time to time; don't fail the run because of them.
+    # restate-bin failures still fail the run.
+    continue-on-error: ${{ matrix.package == 'restate' }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -27,12 +31,7 @@ jobs:
           # Unpinned, always the latest revision (users following their own nixpkgs)
           - github:NixOS/nixpkgs/nixpkgs-unstable
           - github:cachix/devenv-nixpkgs/rolling
-          # TODO: remove once NixOS/nixpkgs#574205 is merged
-          - github:sagikazarmark/nixpkgs/restate-fix-build
         os: [ubuntu-latest, ubuntu-26.04-arm, macos-latest]
-        exclude:
-          - package: restate-bin
-            nixpkgs: github:sagikazarmark/nixpkgs/restate-fix-build
 
     steps:
       - name: Checkout repository

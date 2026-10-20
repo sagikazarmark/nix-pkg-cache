@@ -48,8 +48,8 @@
           };
         in
         {
-          # Source build from nixpkgs
-          restate = pkgs.restate;
+          # Source build from nixpkgs (with build fixes until they land upstream)
+          restate = pkgs.callPackage ./pkgs/restate { };
 
           # Pre-built upstream binaries from GitHub releases
           restate-bin = pkgs.callPackage ./pkgs/restate-bin { };
