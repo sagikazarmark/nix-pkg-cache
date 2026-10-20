@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Daily, to populate the cache for new nixpkgs-unstable and devenv-nixpkgs rolling revisions
+    - cron: "37 14 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+
+    # Source builds depend on nixpkgs and break from time to time; don't fail the run because of them.
+    # restate-bin failures still fail the run.
+    continue-on-error: ${{ matrix.package == 'restate' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [restate, restate-bin]
+        nixpkgs:
+          # The nixpkgs revision from flake.lock (direct users of this flake)
+          - locked
+          # Unpinned, always the latest revision (users following their own nixpkgs)
+          - github:NixOS/nixpkgs/nixpkgs-unstable
+          - github:cachix/devenv-nixpkgs/rolling
+        os: [ubuntu-latest, ubuntu-26.04-arm, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Free Disk Space
+        uses: wimpysworld/nothing-but-nix@687c797a730352432950c707ab493fcc951818d7 # v10
+        if: runner.os == 'Linux' && matrix.package != 'restate-bin'
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31.11.1
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+            accept-flake-config = true
+
+      - name: Set up Cachix
+        uses: cachix/cachix-action@38b082610b782e7e93e209c35fd730d399dee866 # v17
+        with:
+          name: restate
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          skipPush: ${{ github.event_name == 'pull_request' || github.event_name == 'merge_group' }}
+          # Don't push upstream release archives (restate-bin sources), only build outputs
+          pushFilter: '-(restate-cli|restate-server|restatectl)-[^/]*\.tar\.xz$'
+
+      - name: Build
+        run: |
+          args=()
+          if [[ "$NIXPKGS" != locked ]]; then
+            args+=(--override-input nixpkgs "$NIXPKGS")
+          fi
+          nix build -L ".#$PACKAGE" "${args[@]}"
+        env:
+          PACKAGE: ${{ matrix.package }}
+          NIXPKGS: ${{ matrix.nixpkgs }}
