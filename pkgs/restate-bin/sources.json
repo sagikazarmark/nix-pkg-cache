@@ -1,25 +1,25 @@
 {
-  "version": "1.8.0",
+  "version": "1.8.1",
   "assets": {
     "aarch64-darwin": {
-      "restate-cli": "sha256-ZLHfaI5t4P5g+00WXAQr3lhLnwcIlCszgNxwEQVNzIE=",
-      "restate-server": "sha256-W+8d1vztC/Qwnx1LjNQAQswcCy2+pQCYBeGgUESDdp0=",
-      "restatectl": "sha256-kVWpeJj7a7LKZB3WzCp+xyb/W32zHv6MMChJR+cVgGQ="
+      "restate-cli": "sha256-YCOFTYIRy67kIB8g/1HZAWWlYX7v+f/pXrqU9mH9XyA=",
+      "restate-server": "sha256-4uo9zgEUCYH+TRWgnlNxhoFXTTopD1VmsQJbSiaWo+s=",
+      "restatectl": "sha256-jaK/SiODWUFgAoAuELn1Fz6OneCP7MliruVO63sQjS4="
     },
     "aarch64-linux": {
-      "restate-cli": "sha256-UusNfYNkZWNJIbsBn4GIbo/GUVnu1snKUcZnl2FLuKk=",
-      "restate-server": "sha256-UY0DcZP/rokYM8kdXrJFMWOXdM9hooVILpgYByFTYek=",
-      "restatectl": "sha256-HfliYjX8GjFc9Rjwn4kxlVXKKzGOW4vHJVCKr/uI+sg="
+      "restate-cli": "sha256-gsq3CCOsfFC7M7DDk811y0a4fwGAkag+tLJMWjMgcvM=",
+      "restate-server": "sha256-fTDUxzppePe05KLAgWP79OVonEU0rwE7uP034ANHSFc=",
+      "restatectl": "sha256-1tfrmbOYvQMAMDfKIPblWE+8L6vEZmAulDFVpAKFro0="
     },
     "x86_64-darwin": {
-      "restate-cli": "sha256-EMcUIWLJvUNr1KuFHHCR2YFJ8D8dO8eLDRSsWHXPHVo=",
-      "restate-server": "sha256-4GzKDtN15TS8ZNaJIqP3aHTXIoXt2k4K5abph1whNPk=",
-      "restatectl": "sha256-Dj/O94c2cp79OvkzLpJSefQUZJadbAfGeOGoiWmYza4="
+      "restate-cli": "sha256-PKN3LW2OQaxJuOQWETIt168+83Hg5TEljnuG4javunQ=",
+      "restate-server": "sha256-xsB5KRthcf80NY3ZS5MV1cN0/B4sqWtiVzyvisBH5sA=",
+      "restatectl": "sha256-U69ujV3AhVlBOorfCEjUuByc+I4j0RXw/jhaAgxlpmc="
     },
     "x86_64-linux": {
-      "restate-cli": "sha256-TlP24t0I0SSY0ALtmxAZrJOg6aRmKAWdS9MowYyaAE0=",
-      "restate-server": "sha256-0LqIcO79Xp1LVNSipLc5tiz+e7hrGkRNSX+hmJrJuzY=",
-      "restatectl": "sha256-unqGsjaf7aqoTsF1v+Okr17OxcqEO4/nbsEM66pFd2k="
+      "restate-cli": "sha256-EMyQGuPIXljsfE6FYGhvkAyK1lsrLw0T9HzqS575S70=",
+      "restate-server": "sha256-VvEszFTuInZX1NiwcGIoSZd0REJRhO4kKjPjzMKL90U=",
+      "restatectl": "sha256-QrOUc+iHVLqWQvBZXY+HJ3UEst8B3V4mqItDVKRqwhs="
     }
   }
 }
